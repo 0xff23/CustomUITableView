@@ -17,6 +17,8 @@ class ArticleTableViewController: UITableViewController {
                       "Creating Gradient Colors Using CAGradientLayer",
                       "A Beginner's Guide to CALayer"]
     let postImages = ["imessage-sticker-pack", "face-detection-featured", "speech-kit-featured", "vapor-web-framework", "cagradientlayer-demo", "calayer-featured"]
+    
+    var postShown = [Bool](repeating: false, count: 6)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,18 +48,29 @@ class ArticleTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleTableViewCell
+        
 
         cell.titleLabel.text = postTitles[(indexPath as NSIndexPath).row]
         cell.postImageView.image = UIImage(named: postImages[(indexPath as NSIndexPath).row])
 
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // Before animation
-        cell.alpha = 0
         
-        // Animation
+        // Determine if the post is displayed. If yes, we just return and no animation will be created
+        if postShown[indexPath.row] {
+            return
+        }
+        // Indicate the post has been displayed, so the animation won't be displayed again
+        postShown[indexPath.row] = true
+        
+        // FadeIn
+        cell.alpha = 0
         UIView.animate(withDuration: 1.0, animations: { cell.alpha = 1})
+        
+        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, -500, 100, 0) // Fly-In effect
+        cell.layer.transform = rotationTransform
+        UIView.animate(withDuration: 1.0, animations: { cell.layer.transform = CATransform3DIdentity })
     }
 }
