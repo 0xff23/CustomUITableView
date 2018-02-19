@@ -1,7 +1,6 @@
 ## CustomUITableView
 
-![Screenshot](https://imgur.com/8xLRa9A)
-![Screenshot](https://imgur.com/BbrPu8Y)
+![Imgur](https://imgur.com/a/3Enti)
 
 ## Requirements
 * iOS 11.0+
