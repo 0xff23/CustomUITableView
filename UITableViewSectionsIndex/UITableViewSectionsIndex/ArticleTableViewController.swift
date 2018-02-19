@@ -9,15 +9,23 @@
 import UIKit
 
 class ArticleTableViewController: UITableViewController {
+    
+    let postTitles = ["Use Background Transfer Service To Download File in Background",
+                      "Face Detection in iOS Using Core Image",
+                      "Building a Speech-to-Text App Using Speech Framework in iOS 10",
+                      "Building Your First Web App in Swift Using Vapor",
+                      "Creating Gradient Colors Using CAGradientLayer",
+                      "A Beginner's Guide to CALayer"]
+    let postImages = ["imessage-sticker-pack", "face-detection-featured", "speech-kit-featured", "vapor-web-framework", "cagradientlayer-demo", "calayer-featured"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        tableView.estimatedRowHeight = 258.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .automatic
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,24 +36,22 @@ class ArticleTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return postTitles.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleTableViewCell
 
-        // Configure the cell...
+        cell.titleLabel.text = postTitles[(indexPath as NSIndexPath).row]
+        cell.postImageView.image = UIImage(named: postImages[(indexPath as NSIndexPath).row])
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
